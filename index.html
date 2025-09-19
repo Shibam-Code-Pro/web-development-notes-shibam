@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development Notes - HTML, CSS & JavaScript</title>
+    <meta
+      name="description"
+      content="Complete web development notes covering HTML, CSS, and JavaScript for interview preparation and learning."
+    />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314b8a6'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-family='monospace' font-size='16' font-weight='bold'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='20' fill='%2314b8a6'/%3E%3Ctext x='90' y='110' text-anchor='middle' fill='white' font-family='monospace' font-size='80' font-weight='bold'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gray: {
+                800: "#1a1a1a",
+                900: "#0f0f0f",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom animations */
+      .fade-in {
+        animation: fadeIn 0.6s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .course-card {
+        transition: all 0.3s ease;
+      }
+
+      .course-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .course-card:hover .course-icon {
+        transform: scale(1.1);
+      }
+
+      .course-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      }
+
+      .hero-gradient {
+        background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stats-counter {
+        animation: countUp 2s ease-out;
+      }
+
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      
+      /* Enhanced Navigation Styles */
+      .nav-link {
+        position: relative;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+      
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #14b8a6, #0d9488);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(-50%);
+      }
+      
+      .nav-link:hover::before {
+        width: 80%;
+      }
+      
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+      
+      .nav-link:hover::after {
+        left: 100%;
+      }
+      
+      .nav-link:hover {
+        background-color: rgba(20, 184, 166, 0.05);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+      }
+      
+      /* Enhanced Feature Cards */
+      .feature-card {
+        position: relative;
+        padding: 2rem;
+        border-radius: 1rem;
+        background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%);
+        border: 1px solid rgba(20, 184, 166, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+      
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.05), transparent);
+        transition: left 0.6s ease;
+      }
+      
+      .feature-card:hover::before {
+        left: 100%;
+      }
+      
+      .feature-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        border-color: rgba(20, 184, 166, 0.3);
+        box-shadow: 0 20px 40px rgba(20, 184, 166, 0.1), 0 0 0 1px rgba(20, 184, 166, 0.1);
+      }
+      
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 4px 8px rgba(20, 184, 166, 0.2));
+      }
+      
+      .feature-card:hover .feature-icon {
+        transform: scale(1.1) rotate(5deg);
+        filter: drop-shadow(0 8px 16px rgba(20, 184, 166, 0.3));
+      }
+      
+      .feature-title {
+        background: linear-gradient(135deg, #14b8a6, #0d9488);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transition: all 0.3s ease;
+      }
+      
+      .feature-card:hover .feature-title {
+        transform: translateX(4px);
+      }
+      
+      /* Enhanced Footer */
+      .footer-enhanced {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        border-top: 2px solid rgba(20, 184, 166, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .footer-enhanced::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #14b8a6, transparent);
+      }
+      
+      .footer-logo {
+        transition: all 0.3s ease;
+      }
+      
+      .footer-logo:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0 4px 8px rgba(20, 184, 166, 0.3));
+      }
+      
+      .footer-text {
+        background: linear-gradient(135deg, #b0b0b0, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .creator-badge {
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(13, 148, 136, 0.1));
+        border: 1px solid rgba(20, 184, 166, 0.2);
+        border-radius: 2rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+      }
+      
+      .creator-badge:hover {
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(13, 148, 136, 0.2));
+        border-color: rgba(20, 184, 166, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(20, 184, 166, 0.1);
+      }
+      
+      .creator-name {
+        background: linear-gradient(135deg, #14b8a6, #0d9488);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 600;
+      }
+      
+      /* Animated Hero Background */
+      .hero-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+      }
+      
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+          radial-gradient(circle at 20% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(13, 148, 136, 0.08) 0%, transparent 50%),
+          radial-gradient(circle at 40% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 50%);
+        animation: backgroundPulse 8s ease-in-out infinite;
+      }
+      
+      .floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      
+      .floating-code {
+        position: absolute;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        color: rgba(20, 184, 166, 0.3);
+        animation: float 20s linear infinite;
+        white-space: nowrap;
+      }
+      
+      .floating-code:nth-child(1) {
+        top: 10%;
+        left: -100px;
+        animation-delay: 0s;
+      }
+      
+      .floating-code:nth-child(2) {
+        top: 30%;
+        right: -150px;
+        animation-delay: -5s;
+        animation-duration: 25s;
+      }
+      
+      .floating-code:nth-child(3) {
+        top: 60%;
+        left: -120px;
+        animation-delay: -10s;
+        animation-duration: 30s;
+      }
+      
+      .floating-code:nth-child(4) {
+        top: 80%;
+        right: -100px;
+        animation-delay: -15s;
+        animation-duration: 22s;
+      }
+      
+      .geometric-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+      }
+      
+      .shape {
+        position: absolute;
+        border: 1px solid rgba(20, 184, 166, 0.2);
+        animation: geometricFloat 15s ease-in-out infinite;
+      }
+      
+      .shape:nth-child(1) {
+        width: 60px;
+        height: 60px;
+        top: 20%;
+        left: 10%;
+        border-radius: 50%;
+        animation-delay: 0s;
+      }
+      
+      .shape:nth-child(2) {
+        width: 40px;
+        height: 40px;
+        top: 70%;
+        right: 15%;
+        transform: rotate(45deg);
+        animation-delay: -5s;
+      }
+      
+      .shape:nth-child(3) {
+        width: 80px;
+        height: 80px;
+        top: 40%;
+        left: 80%;
+        border-radius: 20px;
+        animation-delay: -10s;
+      }
+      
+      @keyframes backgroundPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      @keyframes float {
+        0% { transform: translateX(-100px) translateY(0px) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.3; }
+        90% { opacity: 0.3; }
+        100% { transform: translateX(calc(100vw + 100px)) translateY(-20px) rotate(5deg); opacity: 0; }
+      }
+      
+      @keyframes geometricFloat {
+        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
+        25% { transform: translateY(-20px) rotate(90deg); opacity: 0.4; }
+        50% { transform: translateY(0px) rotate(180deg); opacity: 0.2; }
+        75% { transform: translateY(-10px) rotate(270deg); opacity: 0.3; }
+      }
+      
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+      
+      /* Mobile Navigation */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        border-left: 2px solid rgba(20, 184, 166, 0.2);
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+      }
+      
+      .mobile-menu.active {
+        right: 0;
+      }
+      
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        color: #b0b0b0;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+      
+      .mobile-nav-link:hover {
+        color: #14b8a6;
+        padding-left: 1rem;
+        background: rgba(20, 184, 166, 0.05);
+        border-radius: 0.5rem;
+      }
+      
+      .mobile-nav-link svg {
+        margin-right: 0.75rem;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: all 0.3s ease;
+      }
+      
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #14b8a6;
+        margin: 3px 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 2px;
+      }
+      
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(9px, 9px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      /* Mobile Responsive Adjustments */
+      @media (max-width: 768px) {
+        .hero-section {
+          min-height: 100vh;
+          padding: 1rem;
+        }
+        
+        .hero-content h1 {
+          font-size: 2.5rem;
+          line-height: 1.2;
+        }
+        
+        .hero-content p {
+          font-size: 1.1rem;
+          margin-bottom: 2rem;
+        }
+        
+        .floating-code {
+          font-size: 12px;
+        }
+        
+        .shape {
+          display: none;
+        }
+        
+        .feature-card {
+          padding: 1.5rem;
+        }
+        
+        .course-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        
+        .course-card {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .course-card > div {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .course-card .mb-6:last-of-type {
+          margin-top: auto;
+        }
+        
+        .course-card p {
+          min-height: 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .stats-counter {
+          font-size: 2.5rem !important;
+        }
+        
+        .footer-enhanced {
+          padding: 2rem 1rem;
+        }
+        
+        .creator-badge {
+          flex-direction: column;
+          text-align: center;
+          gap: 0.5rem;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+        
+        .hero-content p {
+          font-size: 1rem;
+        }
+        
+        .hero-content .flex {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        
+        .feature-card {
+          padding: 1rem;
+        }
+        
+        .footer-enhanced .flex {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      /* Responsive grid */
+      @media (max-width: 768px) {
+        .course-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .course-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .course-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen gradient-bg">
+    <!-- Header -->
+    <header
+      class="bg-gray-800 border-b border-gray-700 sticky top-0 z-40"
+      style="transform: translateZ(0); will-change: auto"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between py-4">
+          <div class="flex items-center space-x-3">
+            <div class="flex items-center bg-teal-600 px-2.5 py-1.5 rounded-md">
+              <span class="text-white font-bold text-base font-mono">&lt;/&gt;</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-bold text-teal-400">
+              Web Development Notes
+            </h1>
+          </div>
+          <nav class="hidden md:flex space-x-2">
+            <a href="#features" class="nav-link text-gray-300 hover:text-teal-400 font-medium">Features</a>
+            <a href="#courses" class="nav-link text-gray-300 hover:text-teal-400 font-medium">Courses</a>
+            <a href="#stats" class="nav-link text-gray-300 hover:text-teal-400 font-medium">Stats</a>
+          </nav>
+          
+          <!-- Mobile Hamburger Menu -->
+          <div class="md:hidden">
+            <button class="hamburger" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+      <!-- Hero Section -->
+      <section class="hero-section px-4 sm:px-6 lg:px-8">
+        <!-- Floating Code Elements -->
+        <div class="floating-elements">
+          <div class="floating-code">&lt;div class="hero"&gt; Welcome to Web Development &lt;/div&gt;</div>
+          <div class="floating-code">const skills = ['HTML', 'CSS', 'JavaScript'];</div>
+          <div class="floating-code">function masterWebDev() { return 'Success!'; }</div>
+          <div class="floating-code">.hero { background: linear-gradient(45deg, #teal); }</div>
+        </div>
+        
+        <!-- Geometric Shapes -->
+        <div class="geometric-shapes">
+          <div class="shape"></div>
+          <div class="shape"></div>
+          <div class="shape"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto text-center hero-content">
+          <div class="fade-in">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Master Web Development
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+              Complete notes covering HTML, CSS, and JavaScript for interview
+              preparation and professional development
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="#courses"
+                class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Start Learning
+              </a>
+              <a
+                href="#features"
+                class="border border-teal-600 text-teal-400 hover:bg-teal-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-bold text-teal-400 mb-4">
+              Why Choose Our Notes?
+            </h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+              Each course is designed with interview preparation and practical
+              learning in mind
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="feature-card text-center fade-in">
+              <div class="feature-icon">📖</div>
+              <h3 class="feature-title text-xl font-semibold mb-3">
+                Comprehensive Content
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                Each chapter includes explanations, code examples, and practical
+                analogies for deep understanding
+              </p>
+            </div>
+
+            <div class="feature-card text-center fade-in">
+              <div class="feature-icon">🧪</div>
+              <h3 class="feature-title text-xl font-semibold mb-3">
+                Interactive Quizzes
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                Test your knowledge with instant feedback and detailed
+                explanations to reinforce learning
+              </p>
+            </div>
+
+            <div class="feature-card text-center fade-in">
+              <div class="feature-icon">📱</div>
+              <h3 class="feature-title text-xl font-semibold mb-3">
+                Mobile Responsive
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                Study anywhere with fully responsive design and mobile-friendly
+                interface optimized for all devices
+              </p>
+            </div>
+
+            <div class="feature-card text-center fade-in">
+              <div class="feature-icon">🔍</div>
+              <h3 class="feature-title text-xl font-semibold mb-3">
+                Smart Search
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                Quickly find topics with real-time search and chapter filtering
+                for efficient learning
+              </p>
+            </div>
+
+            <div class="feature-card text-center fade-in">
+              <div class="feature-icon">📋</div>
+              <h3 class="feature-title text-xl font-semibold mb-3">
+                Copy Code Examples
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                One-click copy functionality for all code snippets and examples
+                to speed up your development
+              </p>
+            </div>
+
+            <div class="feature-card text-center fade-in">
+              <div class="feature-icon">🎯</div>
+              <h3 class="feature-title text-xl font-semibold mb-3">
+                Interview Ready
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                Focused content covering common interview questions and best
+                practices for career success
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Courses Section -->
+      <section id="courses" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl sm:text-4xl font-bold text-teal-400 mb-4">
+              Choose Your Course
+            </h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+              Comprehensive notes for each technology with examples, quizzes,
+              and practical projects
+            </p>
+          </div>
+
+          <div class="course-grid grid gap-8 items-stretch">
+            <!-- HTML Course Card -->
+            <div
+              class="course-card bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-teal-500"
+            >
+              <div class="text-center">
+                <div class="course-icon mb-6 flex justify-center">
+                  <svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 3L3.5 20.5L12 22L20.5 20.5L22 3H2Z"
+                      fill="#E34F26"
+                    />
+                    <path d="M12 4.5H20L19 18.5L12 20V4.5Z" fill="#EF652A" />
+                    <path d="M12 4.5V20L5 18.5L4 4.5H12Z" fill="#E34F26" />
+                    <path
+                      d="M6.5 7H17.5L17 12H12V14.5H16.5L16 17L12 18L8 17L7.5 14.5H10V12H7L6.5 7Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-teal-400 mb-4">HTML Notes</h3>
+                <p class="text-gray-300 mb-6 text-lg">
+                  Master HTML fundamentals with 16 comprehensive chapters
+                  covering structure, semantics, and accessibility
+                </p>
+                <div class="mb-6">
+                  <div class="flex flex-wrap gap-2 justify-center mb-4">
+                    <span
+                      class="bg-teal-600 text-white px-3 py-1 rounded-full text-sm"
+                      >16 Chapters</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >SVG Graphics</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Web Components</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Accessibility</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="html-notes-shibam/index.html"
+                  class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors w-full"
+                >
+                  Start HTML Course
+                </a>
+              </div>
+            </div>
+
+            <!-- CSS Course Card -->
+            <div
+              class="course-card bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-teal-500"
+            >
+              <div class="text-center">
+                <div class="course-icon mb-6 flex justify-center">
+                  <svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 3L3.5 20.5L12 22L20.5 20.5L22 3H2Z"
+                      fill="#1572B6"
+                    />
+                    <path d="M12 4.5H20L19 18.5L12 20V4.5Z" fill="#33A9DC" />
+                    <path d="M12 4.5V20L5 18.5L4 4.5H12Z" fill="#1572B6" />
+                    <path
+                      d="M6.5 7H17.5L17 12H12V14.5H16.5L16 17L12 18L8 17L7.5 14.5H10V12H7L6.5 7Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-teal-400 mb-4">CSS Notes</h3>
+                <p class="text-gray-300 mb-6 text-lg">
+                  Master CSS styling with 22 comprehensive chapters
+                  covering layouts, animations, and advanced techniques
+                </p>
+                <div class="mb-6">
+                  <div class="flex flex-wrap gap-2 justify-center mb-4">
+                    <span
+                      class="bg-teal-600 text-white px-3 py-1 rounded-full text-sm"
+                      >22 Chapters</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Flexbox & Grid</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Animations</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Frameworks</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="css-notes-shibam/index.html"
+                  class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors w-full"
+                >
+                  Start CSS Course
+                </a>
+              </div>
+            </div>
+
+            <!-- JavaScript Course Card -->
+            <div
+              class="course-card bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-teal-500"
+            >
+              <div class="text-center">
+                <div class="course-icon mb-6 flex justify-center">
+                  <svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="2"
+                      y="3"
+                      width="20"
+                      height="18"
+                      rx="2"
+                      fill="#F7DF1E"
+                    />
+                    <path
+                      d="M8.5 16.5C8.5 17.3 9.2 18 10 18C10.8 18 11.5 17.3 11.5 16.5V10H9.5V16.5Z"
+                      fill="#000000"
+                    />
+                    <path
+                      d="M13 14.5C13 15.9 14.1 17 15.5 17C16.9 17 18 15.9 18 14.5C18 13.1 16.9 12 15.5 12C14.1 12 13 13.1 13 14.5ZM15.5 13.5C16.1 13.5 16.5 13.9 16.5 14.5C16.5 15.1 16.1 15.5 15.5 15.5C14.9 15.5 14.5 15.1 14.5 14.5C14.5 13.9 14.9 13.5 15.5 13.5Z"
+                      fill="#000000"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-teal-400 mb-4">JavaScript Notes</h3>
+                <p class="text-gray-300 mb-6 text-lg">
+                  Master JavaScript with 34 comprehensive chapters covering
+                  ES6+, DOM, PWAs, and modern build tools
+                </p>
+                <div class="mb-6">
+                  <div class="flex flex-wrap gap-2 justify-center mb-4">
+                    <span
+                      class="bg-teal-600 text-white px-3 py-1 rounded-full text-sm"
+                      >34 Chapters</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >PWAs</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Web APIs</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Security</span
+                    >
+                    <span
+                      class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      >Build Tools</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="javascript-notes-shibam/index.html"
+                  class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors w-full"
+                >
+                  Start JavaScript Course
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Stats Section -->
+      <section id="stats" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="fade-in">
+              <div
+                class="text-4xl sm:text-5xl font-bold text-teal-400 mb-2 stats-counter"
+                data-target="72"
+                data-duration="2000"
+              >
+                0
+              </div>
+              <div class="text-gray-300 text-lg">Total Chapters</div>
+            </div>
+            <div class="fade-in">
+              <div
+                class="text-4xl sm:text-5xl font-bold text-teal-400 mb-2 stats-counter"
+                data-target="3"
+                data-duration="2000"
+              >
+                0
+              </div>
+              <div class="text-gray-300 text-lg">Core Technologies</div>
+            </div>
+            <div class="fade-in">
+              <div
+                class="text-4xl sm:text-5xl font-bold text-teal-400 mb-2 stats-counter"
+                data-target="100"
+                data-duration="2000"
+              >
+                0
+              </div>
+              <div class="text-gray-300 text-lg">Interview Ready</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+          <h2 class="text-3xl sm:text-4xl font-bold text-teal-400 mb-6">
+            Ready to Start Learning?
+          </h2>
+          <p class="text-xl text-gray-300 mb-8">
+            Choose any course above and begin your journey to mastering web
+            development
+          </p>
+          <a
+            href="#courses"
+            class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+          >
+            Explore All Courses
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-enhanced py-6 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center">
+          <div class="footer-logo flex items-center justify-center space-x-3 mb-4">
+            <div class="flex items-center bg-teal-600 px-2 py-1 rounded-lg shadow-lg">
+              <span class="text-white font-bold text-sm font-mono">&lt;/&gt;</span>
+            </div>
+            <span class="text-xl font-bold text-teal-400">Web Development Notes</span>
+          </div>
+          
+          <div class="flex items-center justify-center gap-6 mb-4 text-sm text-gray-400">
+            <span class="flex items-center">
+              <svg class="w-4 h-4 mr-2 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              72 Chapters
+            </span>
+            <span class="flex items-center">
+              <svg class="w-4 h-4 mr-2 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Interview Ready
+            </span>
+            <span class="flex items-center">
+              <svg class="w-4 h-4 mr-2 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+              Free & Open Source
+            </span>
+          </div>
+          
+          <div class="text-center">
+            <p class="text-gray-500 text-sm">
+              © 2025 Web Development Notes • Created with ❤️ by <span class="text-teal-400">Shibam Banerjee</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center space-x-3">
+          <div class="flex items-center bg-teal-600 px-2.5 py-1.5 rounded-md">
+            <span class="text-white font-bold text-base font-mono">&lt;/&gt;</span>
+          </div>
+          <span class="text-lg font-bold text-teal-400">Menu</span>
+        </div>
+        <button class="hamburger active" id="closeMobileMenu" aria-label="Close mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      
+      <nav class="flex flex-col space-y-2">
+        <a href="#features" class="mobile-nav-link">
+          <svg fill="none" stroke="#14b8a6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Features
+        </a>
+        <a href="#courses" class="mobile-nav-link">
+          <svg fill="none" stroke="#14b8a6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+          Courses
+        </a>
+        <a href="#stats" class="mobile-nav-link">
+          <svg fill="none" stroke="#14b8a6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Stats
+        </a>
+        
+        <div class="border-t border-gray-700 mt-6 pt-6">
+          <h3 class="text-teal-400 font-semibold mb-4">Quick Access</h3>
+          <a href="html-notes-shibam/index.html" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M2 3L3.5 20.5L12 22L20.5 20.5L22 3H2Z" fill="#E34F26"/>
+              <path d="M12 4.5H20L19 18.5L12 20V4.5Z" fill="#EF652A"/>
+              <path d="M12 4.5V20L5 18.5L4 4.5H12Z" fill="#E34F26"/>
+              <path d="M6.5 7H17.5L17 12H12V14.5H16.5L16 17L12 18L8 17L7.5 14.5H10V12H7L6.5 7Z" fill="white"/>
+            </svg>
+            HTML Notes
+          </a>
+          <a href="css-notes-shibam/index.html" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M2 3L3.5 20.5L12 22L20.5 20.5L22 3H2Z" fill="#1572B6"/>
+              <path d="M12 4.5H20L19 18.5L12 20V4.5Z" fill="#33A9DC"/>
+              <path d="M12 4.5V20L5 18.5L4 4.5H12Z" fill="#1572B6"/>
+              <path d="M6.5 7H17.5L17 12H12V14.5H16.5L16 17L12 18L8 17L7.5 14.5H10V12H7L6.5 7Z" fill="white"/>
+            </svg>
+            CSS Notes
+          </a>
+          <a href="javascript-notes-shibam/index.html" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" fill="#F7DF1E"/>
+              <path d="M7.5 14.5C7.5 15.88 8.62 17 10 17C11.38 17 12.5 15.88 12.5 14.5V9H10.5V14.5C10.5 14.78 10.28 15 10 15C9.72 15 9.5 14.78 9.5 14.5H7.5Z" fill="#000"/>
+              <path d="M13.5 12.5C13.5 11.12 14.62 10 16 10C17.38 10 18.5 11.12 18.5 12.5C18.5 13.33 18.08 14.04 17.44 14.44C17.16 14.61 16.84 14.7 16.5 14.7H16V16.2H17.5V17.7H14.5V13.2H16C16.28 13.2 16.5 12.98 16.5 12.7C16.5 12.42 16.28 12.2 16 12.2C15.72 12.2 15.5 12.42 15.5 12.7H13.5C13.5 12.5 13.5 12.5 13.5 12.5Z" fill="#000"/>
+            </svg>
+            JavaScript Notes
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <script>
+      // Mobile Menu Functionality
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const closeMobileMenu = document.getElementById('closeMobileMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      
+      function toggleMobileMenu() {
+        mobileMenu.classList.toggle('active');
+        mobileMenuOverlay.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      function closeMobileMenuFunc() {
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        closeMobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+      mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
+      
+      // Close mobile menu when clicking on nav links
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          setTimeout(closeMobileMenuFunc, 100);
+        });
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add fade-in animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(el);
+      });
+
+      // Animate stats counters with different speeds and smooth styling
+      const animateCounters = () => {
+        const counters = document.querySelectorAll(".stats-counter");
+        counters.forEach((counter, index) => {
+          const target = parseInt(counter.getAttribute("data-target"));
+          const duration = parseInt(counter.getAttribute("data-duration"));
+          const startTime = performance.now();
+
+          // Add staggered delay for each counter
+          const delay = index * 300;
+
+          const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime - delay;
+
+            if (elapsed < 0) {
+              requestAnimationFrame(updateCounter);
+              return;
+            }
+
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Enhanced easing function for smoother animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = Math.floor(easeOutQuart * target);
+
+            // Add pulsing effect during animation
+            if (progress < 1) {
+              counter.style.transform = `scale(${
+                1 + Math.sin(progress * Math.PI * 4) * 0.05
+              })`;
+              counter.style.textShadow = `0 0 ${
+                10 + Math.sin(progress * Math.PI * 6) * 5
+              }px rgba(20, 184, 166, 0.5)`;
+            } else {
+              counter.style.transform = "scale(1)";
+              counter.style.textShadow = "0 0 10px rgba(20, 184, 166, 0.3)";
+            }
+
+            // Add % symbol for Interview Ready counter
+            if (counter.getAttribute("data-target") === "100") {
+              counter.textContent = current + "%";
+            } else {
+              counter.textContent = current;
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              // Ensure final value is exact
+              if (counter.getAttribute("data-target") === "100") {
+                counter.textContent = target + "%";
+              } else {
+                counter.textContent = target;
+              }
+            }
+          };
+
+          requestAnimationFrame(updateCounter);
+        });
+      };
+
+      // Trigger counter animation when stats section is visible
+      const statsSection = document.getElementById("stats");
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounters();
+              statsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      if (statsSection) {
+        statsObserver.observe(statsSection);
+      }
+    </script>
+  </body>
+</html>
