@@ -119,3 +119,19 @@ screenshot/temp*
 test/
 demo/
 examples/temp*
+
+# Git specific
+.git/
+
+# Documentation drafts
+drafts/
+*.draft
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# System files
+*.lnk
+*.url

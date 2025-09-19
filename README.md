@@ -11,6 +11,9 @@ A comprehensive, responsive technical documentation website covering HTML, CSS, 
 
 <div align="center">
   
+  <img src="screenshot/web-development-notes-shibam.png" alt="Web Development Notes Homepage - Shibam" width="800">
+  <p><em>Homepage with modern dark theme, course navigation cards, and responsive design</em></p>
+  
   <img src="screenshot/html-notes-shibam.png" alt="HTML Notes - Shibam" width="800">
   <p><em>HTML notes with structured chapters, sidebar navigation, and interactive examples</em></p>
   
@@ -100,13 +103,20 @@ Each chapter includes: Detailed explanations, interactive code examples with cop
 ```
 web-development-notes-shibam/
 ├── 📄 index.html                     # Root hub page with navigation to HTML/CSS/JS notes
-├── 📁 html-notes-shibam/             # HTML notes (index.html, script.js)
-├── 📁 css-notes-shibam/              # CSS notes (index.html, script.js)
-├── 📁 javascript-notes-shibam/       # JavaScript notes (index.html, script.js)
+├── 📁 html-notes-shibam/             # HTML notes section
+│   ├── index.html                    # HTML documentation with 16 chapters
+│   └── script.js                     # Interactive functionality and navigation
+├── 📁 css-notes-shibam/              # CSS notes section
+│   ├── index.html                    # CSS documentation with 22 chapters
+│   └── script.js                     # Interactive functionality and navigation
+├── 📁 javascript-notes-shibam/       # JavaScript notes section
+│   ├── index.html                    # JavaScript documentation with 34 chapters
+│   └── script.js                     # Interactive functionality and navigation
 ├── 📸 screenshot/                    # Project screenshots
-│   ├── html-notes-shibam.png
-│   ├── css-notes-shibam.png
-│   └── javascript-notes-shibam.png
+│   ├── web-development-notes-shibam.png  # Homepage screenshot
+│   ├── html-notes-shibam.png        # HTML notes screenshot
+│   ├── css-notes-shibam.png         # CSS notes screenshot
+│   └── javascript-notes-shibam.png  # JavaScript notes screenshot
 ├── 📖 README.md                      # Project documentation
 ├── 📜 LICENSE                        # MIT License
 └── 🚫 .gitignore                     # Git ignore rules
