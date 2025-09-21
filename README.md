@@ -26,7 +26,7 @@ A comprehensive, responsive technical documentation website covering HTML, CSS, 
 
 ## ✨ Live Demo
 
-[View Web Development Notes](https://web-development-notes-shibam.vercel.app)
+🌐 [View Web Development Notes](https://web-development-notes-shibam.vercel.app)
 
 ## 🚀 Features
 
